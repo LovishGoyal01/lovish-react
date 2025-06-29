@@ -35,12 +35,30 @@
     height: 120px;
     margin: 5px;
 }
-.search{
-    padding: 15px;
+.filter-btn{
+    margin: 10px;
+    cursor: pointer;
 }
 .res-container{
     margin: 7px;
     gap: 11px;
     display: flex;
     flex-wrap: wrap;
+}
+.shimmer-container{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.shimmer-card{
+    width: 200px;
+    height: 400px;
+    background-color: #f0f0f0 ;
+    margin: 20px;
+}
+
+.login-button{
+    padding: 0px 15px;
+    cursor: pointer;
+
 }
