@@ -5,10 +5,14 @@
     const Body = () => {
 
         const [ListOfRestaurant, setListOfRestaurant]= useState([]); 
+        const [filterdRestaurant, setfilterdRestaurant]= useState([]); 
+        
+        const [searchtext,setsearchtext]=useState("");
 
         useEffect(() => {
             fetchData();
         },[]);
+
 
      const fetchData = async () => {
           const data = await fetch("http://localhost:3001/api/restaurants");
@@ -24,6 +28,7 @@
             if (Array.isArray(restaurants)) 
                 {
                setListOfRestaurant(restaurants);
+               setfilterdRestaurant(restaurants);
                 } else {
                        setListOfRestaurant([]); // prevent crash
                        console.warn("Restaurants data not found in API response.");
@@ -34,20 +39,40 @@
                 return <Shimmer/>
              }
 
+
         return(
             <div className="body">
                 <div className="filter">
-                    <button className="filter-btn" onClick={() => {
+                   <div className="search">
+                    <input 
+                    type="text" 
+                    className="search-box"
+                    value={searchtext}
+                    onChange={(e) =>{ setsearchtext(e.target.value);}}
+                    >
+                    </input>
+                    <button onClick={()=> {
+                     
+                    const filterdReasturant= ListOfRestaurant.filter((res) => res.info.name.toLowerCase().includes(searchtext.toLowerCase())
+                    );
+                    setfilterdRestaurant(filterdReasturant);
+                    }}
+                    >Search
+                    </button>
+                   </div>
+
+                    <button
+                     className="filter-btn" onClick={() => {
                         const filteredlist = ListOfRestaurant.filter(
                             (res) =>  res.info.avgRating > 4 );
-                        setListOfRestaurant(filteredlist);
-                }}
+                        setfilterdRestaurant(filteredlist);
+                     }}
                     >
                     Top Rated Restaurant
-                </button>
+                    </button>
                 </div>
                 <div className="res-container">
-                { ListOfRestaurant.map((restaurant) => (
+                { filterdRestaurant.map((restaurant) => (
                     <RestaurantCard key={restaurant.info.id} resdata={restaurant} />
                 ))}
                 

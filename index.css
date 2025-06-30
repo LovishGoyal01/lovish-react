@@ -36,8 +36,8 @@
     margin: 5px;
 }
 .filter-btn{
-    margin: 10px;
     cursor: pointer;
+    margin-left: 10px;
 }
 .res-container{
     margin: 7px;
@@ -58,7 +58,12 @@
 }
 
 .login-button{
-    padding: 0px 15px;
+    padding: 0px 2 5px;
     cursor: pointer;
 
+}
+.filter{
+    display: flex;
+    margin: 10px;
+    gap: 10px;
 }
